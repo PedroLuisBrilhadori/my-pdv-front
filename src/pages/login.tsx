@@ -1,14 +1,29 @@
-import { Dispatch, SetStateAction, useContext, useState } from "react";
-import { useForm } from "react-hook-form";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
+import { useForm, UseFormRegister, FieldValues } from "react-hook-form";
 import { AuthContext } from "../context/AuthContext";
+import "animate.css";
 
 const LoginPage = () => {
   const { register, handleSubmit } = useForm();
   const [inputState, setInputState] = useState("password");
   const { signIn } = useContext(AuthContext);
 
+  const [wrong, setWrong] = useState({ user: false, password: false });
+
   async function handleSignIn(data: any) {
-    signIn(data);
+    try {
+      await signIn(data);
+    } catch (error) {
+      const { status } = error as { status: number; message: string };
+      handlerInputError(status, setWrong);
+    }
   }
 
   return (
@@ -20,37 +35,29 @@ const LoginPage = () => {
       <HeaderInfo />
 
       <div className="mx-auto mt-8 mb-0 max-w-md space-y-4">
-        <div>
-          <label htmlFor="email" className="sr-only">
-            Email
-          </label>
+        <InputForm
+          id="email"
+          type="email"
+          label="Email"
+          placeholder="Insira seu email..."
+          register={register}
+          wrong={wrong.user}
+          onChange={() => setWrong({ user: false, password: false })}
+        >
+          <DomainIcon />
+        </InputForm>
 
-          <div className="relative">
-            <input
-              {...register("email")}
-              type="email"
-              className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
-              placeholder="Enter email"
-            />
-            <DomainIcon />
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="password" className="sr-only">
-            Password
-          </label>
-
-          <div className="relative">
-            <input
-              {...register("password")}
-              type={inputState}
-              className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
-              placeholder="Enter password"
-            />
-            <EyeIcon state={inputState} setState={setInputState} />
-          </div>
-        </div>
+        <InputForm
+          id="password"
+          label="Senha"
+          type={inputState}
+          placeholder="Insira sua senha..."
+          register={register}
+          wrong={wrong.password}
+          onChange={() => setWrong({ user: false, password: false })}
+        >
+          <EyeIcon state={inputState} setState={setInputState} />
+        </InputForm>
 
         <div className="flex items-center justify-center">
           <button
@@ -63,6 +70,83 @@ const LoginPage = () => {
         </div>
       </div>
     </form>
+  );
+};
+
+type InputFormType = {
+  id: string;
+  label: string;
+  type: string;
+  placeholder: string;
+  register: UseFormRegister<FieldValues>;
+  wrong?: boolean;
+  children: JSX.Element;
+  value?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+};
+
+const InputForm = ({ id, type, register, label, ...props }: InputFormType) => {
+  const styleName = props.wrong ? "wrong" : "normal";
+
+  const style = {
+    wrong: `rounded border-2 border-red-600 text-red-600 animate__animated animate__shakeX`,
+    normal: ``,
+  };
+
+  return (
+    <div className={`${style[styleName]}`}>
+      <label htmlFor="password" className="sr-only">
+        {label}
+      </label>
+
+      <div className="relative">
+        <InputData
+          id={id}
+          register={register}
+          type={type}
+          placeholder={props.placeholder}
+          onChange={props.onChange}
+          value={props.value}
+        />
+
+        {props.children}
+      </div>
+    </div>
+  );
+};
+
+const handlerInputError = (
+  status: number,
+  setWrong: ({}: { user: boolean; password: boolean }) => any
+) => {
+  if (status == 401) {
+    setWrong({ user: false, password: true });
+  }
+
+  if (status == 404) {
+    setWrong({ user: true, password: true });
+  }
+};
+
+type InputDataType = {
+  id: string;
+  type: string;
+  placeholder: string;
+  register: UseFormRegister<FieldValues>;
+  value?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+};
+
+const InputData = ({ id, type, register, ...props }: InputDataType) => {
+  return (
+    <input
+      {...register(id)}
+      type={type}
+      className={`w-full rounded-lg p-4 pr-12 text-sm shadow-sm`}
+      placeholder={props.placeholder}
+      value={props.value}
+      onChange={props.onChange}
+    />
   );
 };
 
@@ -99,13 +183,12 @@ const DomainIcon = () => {
   );
 };
 
-const EyeIcon = ({
-  state,
-  setState,
-}: {
+type EyeIconType = {
   state: string;
   setState: Dispatch<SetStateAction<string>>;
-}) => {
+};
+
+const EyeIcon = ({ state, setState }: EyeIconType) => {
   return (
     <span
       onClick={() => changeEyeState(state, setState)}
@@ -135,10 +218,7 @@ const EyeIcon = ({
   );
 };
 
-function changeEyeState(
-  state: string,
-  setState: Dispatch<SetStateAction<string>>
-) {
+function changeEyeState(state: string, setState: (id: string) => any) {
   if (state === "password") return setState("text");
 
   setState("password");

@@ -54,7 +54,9 @@ export function AuthProvider({ children }: any) {
       }),
     });
 
-    const { token, user } = await request.json();
+    const { success, token, user, message } = await request.json();
+
+    if (!success) throw { message, status: request.status };
 
     setCookie(undefined, "nextauth.token", token, {
       maxAge: 60 * 60 * 1, // 1 hour
