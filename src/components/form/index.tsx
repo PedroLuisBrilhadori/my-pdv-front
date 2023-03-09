@@ -8,7 +8,7 @@ type InputFormType = {
   type: string;
   placeholder: string;
   register: UseFormRegister<FieldValues>;
-  wrong?: boolean;
+  error?: boolean;
   children: JSX.Element;
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -21,10 +21,10 @@ export const InputForm = ({
   label,
   ...props
 }: InputFormType) => {
-  const styleName = props.wrong ? "wrong" : "normal";
+  const styleName = props.error ? "error" : "normal";
 
   const style = {
-    wrong: `rounded border-2 border-red-600 text-red-600 animate__animated animate__shakeX`,
+    error: `animate__animated animate__shakeX`,
     normal: ``,
   };
 
@@ -42,6 +42,7 @@ export const InputForm = ({
           placeholder={props.placeholder}
           onChange={props.onChange}
           value={props.value}
+          error={props.error}
         />
 
         {props.children}
@@ -55,16 +56,22 @@ type InputDataType = {
   type: string;
   placeholder: string;
   register: UseFormRegister<FieldValues>;
+  error?: boolean;
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 };
 
 const InputData = ({ id, type, register, ...props }: InputDataType) => {
+  const customStyle = `${
+    props.error ? "bg-red-200 text-red-600 border-2 border-red-600" : ""
+  }`;
+
   return (
     <input
       {...register(id)}
       type={type}
-      className={`w-full rounded-lg p-4 pr-12 text-sm shadow-sm`}
+      autoComplete="off"
+      className={`w-full rounded-lg p-4 pr-12 text-sm shadow-sm ${customStyle}`}
       placeholder={props.placeholder}
       value={props.value}
       onChange={props.onChange}

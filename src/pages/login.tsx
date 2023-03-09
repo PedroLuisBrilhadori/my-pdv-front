@@ -8,7 +8,7 @@ const LoginPage = () => {
   const [inputState, setInputState] = useState("password");
   const { signIn } = useContext(AuthContext);
 
-  const [wrong, setWrong] = useState({ user: false, password: false });
+  const [error, setWrong] = useState({ user: false, password: false });
 
   async function handleSignIn(data: any) {
     signIn(data).catch((error) => {
@@ -27,6 +27,7 @@ const LoginPage = () => {
   return (
     <Page title="Login">
       <form
+        autoComplete="off"
         id="login-form"
         className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8"
         onSubmit={handleSubmit(handleSignIn)}
@@ -40,7 +41,7 @@ const LoginPage = () => {
             label="Email"
             placeholder="Insira seu email..."
             register={register}
-            wrong={wrong.user}
+            error={error.user}
             onChange={() => setWrong({ user: false, password: false })}
           >
             <DomainIcon />
@@ -52,7 +53,7 @@ const LoginPage = () => {
             type={inputState}
             placeholder="Insira sua senha..."
             register={register}
-            wrong={wrong.password}
+            error={error.password}
             onChange={() => setWrong({ user: false, password: false })}
           >
             <EyeIcon state={inputState} setState={setInputState} />
