@@ -1,9 +1,9 @@
-import { Page, TaskBar } from "../components";
+import { Page } from "../components";
 
 export default function Historic() {
   return (
-    <Page>
-      <TaskBar></TaskBar>
+    <Page taskBar={true}>
+      <div></div>
     </Page>
   );
 }
