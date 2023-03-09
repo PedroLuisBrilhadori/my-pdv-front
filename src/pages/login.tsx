@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../context/AuthContext";
 import { InputForm, DomainIcon, EyeIcon } from "../components/";
+import Page from "../components/page";
 
 const LoginPage = () => {
   const { register, handleSubmit } = useForm();
@@ -25,49 +26,51 @@ const LoginPage = () => {
   }
 
   return (
-    <form
-      id="login-form"
-      className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8"
-      onSubmit={handleSubmit(handleSignIn)}
-    >
-      <HeaderInfo />
+    <Page title="Login">
+      <form
+        id="login-form"
+        className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8"
+        onSubmit={handleSubmit(handleSignIn)}
+      >
+        <HeaderInfo />
 
-      <div className="mx-auto mt-8 mb-0 max-w-md space-y-4">
-        <InputForm
-          id="email"
-          type="email"
-          label="Email"
-          placeholder="Insira seu email..."
-          register={register}
-          wrong={wrong.user}
-          onChange={() => setWrong({ user: false, password: false })}
-        >
-          <DomainIcon />
-        </InputForm>
-
-        <InputForm
-          id="password"
-          label="Senha"
-          type={inputState}
-          placeholder="Insira sua senha..."
-          register={register}
-          wrong={wrong.password}
-          onChange={() => setWrong({ user: false, password: false })}
-        >
-          <EyeIcon state={inputState} setState={setInputState} />
-        </InputForm>
-
-        <div className="flex items-center justify-center">
-          <button
-            type="submit"
-            className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
-            onClick={() => {}}
+        <div className="mx-auto mt-8 mb-0 max-w-md space-y-4">
+          <InputForm
+            id="email"
+            type="email"
+            label="Email"
+            placeholder="Insira seu email..."
+            register={register}
+            wrong={wrong.user}
+            onChange={() => setWrong({ user: false, password: false })}
           >
-            Sign in
-          </button>
+            <DomainIcon />
+          </InputForm>
+
+          <InputForm
+            id="password"
+            label="Senha"
+            type={inputState}
+            placeholder="Insira sua senha..."
+            register={register}
+            wrong={wrong.password}
+            onChange={() => setWrong({ user: false, password: false })}
+          >
+            <EyeIcon state={inputState} setState={setInputState} />
+          </InputForm>
+
+          <div className="flex items-center justify-center">
+            <button
+              type="submit"
+              className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+              onClick={() => {}}
+            >
+              Sign in
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </Page>
   );
 };
 
