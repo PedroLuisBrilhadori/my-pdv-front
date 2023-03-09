@@ -1,6 +1,6 @@
 import { Page, TaskBar } from "../components";
 
-export default function Home() {
+export default function Historic() {
   return (
     <Page>
       <TaskBar></TaskBar>

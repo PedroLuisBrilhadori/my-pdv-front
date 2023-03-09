@@ -1,8 +1,7 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../context/AuthContext";
-import { InputForm, DomainIcon, EyeIcon } from "../components/";
-import Page from "../components/page";
+import { Page, InputForm, DomainIcon, EyeIcon } from "../components/";
 
 const LoginPage = () => {
   const { register, handleSubmit } = useForm();
