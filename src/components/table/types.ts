@@ -1,3 +1,5 @@
+import { SortState } from "./sort";
+
 export enum TableColumnType {
   String = "string",
   Number = "number",
@@ -11,6 +13,7 @@ export type TableHeaderType = {
   type: TableColumnType;
   booleanTransform?: { false: string; true: string };
   sort?: boolean;
+  sortListener?: (sort: SortState, name: string) => any;
 };
 
 export type TableRowType<T> = {

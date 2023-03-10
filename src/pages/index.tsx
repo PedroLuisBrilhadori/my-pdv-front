@@ -4,8 +4,20 @@ import { ApiRoutes, getToken } from "../services/api";
 
 export default function Home() {
   const columns: TableHeaderType[] = [
-    { name: "name", displayName: "Nome", type: TableColumnType.String },
-    { name: "price", displayName: "Preço", type: TableColumnType.Currency },
+    {
+      name: "name",
+      displayName: "Nome",
+      type: TableColumnType.String,
+      sort: true,
+      sortListener: (state, name) => console.log(state, name),
+    },
+    {
+      name: "price",
+      displayName: "Preço",
+      type: TableColumnType.Currency,
+      sort: true,
+      sortListener: (state, name) => console.log(state, name),
+    },
     {
       name: "unit",
       displayName: "Preço Por:",

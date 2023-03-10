@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Icon } from "../../icons";
 
-export type SortState = "asc" | "desc" | "";
+export type SortState = "asc" | "desc" | null;
 
 export type SortIconType = {
   state: SortState;
@@ -32,13 +32,45 @@ export const SortIcon = ({ state }: SortIconType) => {
   return renderIcon();
 };
 
-export const useSort = (): [SortState, () => void] => {
-  const [sortState, setSortState] = useState<SortState>("");
+export type HeaderSortType = {
+  displayName: string;
+  sortState: SortState;
+  onClick?: (e: any) => any;
+};
 
-  function next() {
-    if (sortState === "asc") setSortState("desc");
-    if (sortState === "desc") setSortState("");
-    if (sortState === "") setSortState("asc");
+export const HeaderSort = ({
+  displayName,
+  onClick,
+  sortState,
+}: HeaderSortType) => {
+  return (
+    <div className="flex items-center cursor-pointer w-fit" onClick={onClick}>
+      {displayName}
+      <SortIcon state={sortState} />
+    </div>
+  );
+};
+
+export type UseSortType = [
+  SortState,
+  (listener?: (state: SortState, name: string) => any, name?: string) => void
+];
+
+export const useSort = (): UseSortType => {
+  const [sortState, setSortState] = useState<SortState>(null);
+
+  function next(
+    listener?: (state: SortState, name: string) => any,
+    name?: string
+  ) {
+    let state = sortState;
+
+    if (sortState === "asc") state = "desc";
+    if (sortState === "desc") state = null;
+    if (sortState === null) state = "asc";
+
+    if (listener) listener(state, name ?? "");
+    setSortState(state);
   }
 
   return [sortState, next];
