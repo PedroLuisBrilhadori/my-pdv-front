@@ -6,7 +6,12 @@ export default function Home() {
   const columns: TableHeaderType[] = [
     { name: "name", displayName: "Nome", type: TableColumnType.String },
     { name: "price", displayName: "Preço", type: TableColumnType.Currency },
-    { name: "unit", displayName: "Preço Por:", type: TableColumnType.Boolean },
+    {
+      name: "unit",
+      displayName: "Preço Por:",
+      type: TableColumnType.Boolean,
+      booleanTransform: { true: "Unidade", false: "Kg" },
+    },
   ];
 
   const [dataSource, setDataSource] = useState([]);

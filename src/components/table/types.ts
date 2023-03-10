@@ -9,6 +9,7 @@ export type TableHeaderType = {
   name: string;
   displayName: string;
   type: TableColumnType;
+  booleanTransform?: { false: string; true: string };
 };
 
 export type TableRowType<T> = {

@@ -1,5 +1,10 @@
 import { get } from "lodash";
-import { TableHeaderType, TableRowType, TableType } from "./types";
+import {
+  TableColumnType,
+  TableHeaderType,
+  TableRowType,
+  TableType,
+} from "./types";
 
 export const Table = <T,>({ dataSource, columns }: TableType<T>) => {
   return (
@@ -21,7 +26,7 @@ export const TableHeader = ({ columns }: { columns: TableHeaderType[] }) => {
   function Item({ displayName, type }: TableHeaderType) {
     return (
       <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
-        {displayName}
+        <div className="flex items-center">{displayName}</div>
       </th>
     );
   }
@@ -43,9 +48,8 @@ export const TableHeader = ({ columns }: { columns: TableHeaderType[] }) => {
 export const TableRow = <T,>({ dataSource, columns }: TableRowType<T>) => {
   function Item({ data, column }: { data: T; column: TableHeaderType }) {
     const item = get(data, column.name);
-    return (
-      <td className="whitespace-nowrap px-4 py-2 text-gray-900">{item}</td>
-    );
+
+    return renderColumnTypes(item, column);
   }
 
   return (
@@ -60,3 +64,39 @@ export const TableRow = <T,>({ dataSource, columns }: TableRowType<T>) => {
     </>
   );
 };
+
+function renderColumnTypes(item: any, column: TableHeaderType): JSX.Element {
+  const booleanColumn = () => {
+    const key = String(item) as "false" | "true";
+    const content = column?.booleanTransform
+      ? column.booleanTransform[key]
+      : String(item);
+
+    return (
+      <td className="whitespace-nowrap px-4 py-2 text-gray-900">{content}</td>
+    );
+  };
+
+  const currencyColumn = () => {
+    const formatter = Intl.NumberFormat("pt-br", {
+      style: "currency",
+      currency: "BRL",
+    });
+    const content = formatter.format(item);
+
+    return (
+      <td className="whitespace-nowrap px-4 py-2 text-gray-900">{content}</td>
+    );
+  };
+
+  switch (column.type) {
+    case TableColumnType.Boolean:
+      return booleanColumn();
+    case TableColumnType.Currency:
+      return currencyColumn();
+    default:
+      return (
+        <td className="whitespace-nowrap px-4 py-2 text-gray-900">{item}</td>
+      );
+  }
+}
