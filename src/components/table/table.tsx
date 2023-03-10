@@ -18,7 +18,7 @@ export const Table = <T,>({ dataSource, columns }: TableType<T>) => {
 };
 
 export const TableHeader = ({ columns }: { columns: TableHeaderType[] }) => {
-  function Item({ displayName }: TableHeaderType) {
+  function Item({ displayName, type }: TableHeaderType) {
     return (
       <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
         {displayName}
@@ -29,7 +29,12 @@ export const TableHeader = ({ columns }: { columns: TableHeaderType[] }) => {
   return (
     <tr>
       {columns.map((column, key) => (
-        <Item name={column.name} displayName={column.displayName} key={key} />
+        <Item
+          name={column.name}
+          displayName={column.displayName}
+          type={column.type}
+          key={key}
+        />
       ))}
     </tr>
   );

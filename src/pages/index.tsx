@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
-import { Page, Table, TableHeaderType } from "../components";
-import { ApiRoutes } from "../services/api";
+import { Page, Table, TableColumnType, TableHeaderType } from "../components";
+import { ApiRoutes, getToken } from "../services/api";
 
 export default function Home() {
   const columns: TableHeaderType[] = [
-    { name: "name", displayName: "Nome" },
-    { name: "price", displayName: "Preço" },
-    { name: "unit", displayName: "Preço Por:" },
+    { name: "name", displayName: "Nome", type: TableColumnType.String },
+    { name: "price", displayName: "Preço", type: TableColumnType.Currency },
+    { name: "unit", displayName: "Preço Por:", type: TableColumnType.Boolean },
   ];
 
   const [dataSource, setDataSource] = useState([]);
 
   useEffect(() => {
-    getProducts().then((products) => setDataSource(products));
+    const token = getToken();
+    if (token) {
+      getProducts().then((products) => setDataSource(products));
+    }
   }, []);
 
   return (

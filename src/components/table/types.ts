@@ -1,6 +1,14 @@
+export enum TableColumnType {
+  String = "string",
+  Number = "number",
+  Boolean = "boolean",
+  Currency = "currency",
+}
+
 export type TableHeaderType = {
   name: string;
   displayName: string;
+  type: TableColumnType;
 };
 
 export type TableRowType<T> = {
