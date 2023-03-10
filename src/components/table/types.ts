@@ -10,6 +10,7 @@ export type TableHeaderType = {
   displayName: string;
   type: TableColumnType;
   booleanTransform?: { false: string; true: string };
+  sort?: boolean;
 };
 
 export type TableRowType<T> = {
