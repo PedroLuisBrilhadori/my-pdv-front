@@ -3,20 +3,21 @@ import { Page, Table, TableColumnType, TableHeaderType } from "../components";
 import { ApiRoutes, getToken } from "../services/api";
 
 export default function Home() {
+  const [productsQuery, setQuery] = useState("");
   const columns: TableHeaderType[] = [
     {
       name: "name",
       displayName: "Nome",
       type: TableColumnType.String,
       sort: true,
-      sortListener: (state, name) => console.log(state, name),
+      sortListener: (state) => setQuery(`?name=${state}`),
     },
     {
       name: "price",
       displayName: "Preço",
       type: TableColumnType.Currency,
       sort: true,
-      sortListener: (state, name) => console.log(state, name),
+      sortListener: (state) => setQuery(`?price=${state}`),
     },
     {
       name: "unit",
@@ -31,9 +32,9 @@ export default function Home() {
   useEffect(() => {
     const token = getToken();
     if (token) {
-      getProducts().then((products) => setDataSource(products));
+      getProducts(productsQuery).then((products) => setDataSource(products));
     }
-  }, []);
+  }, [productsQuery]);
 
   return (
     <Page taskBar={true}>
@@ -42,8 +43,8 @@ export default function Home() {
   );
 }
 
-async function getProducts() {
-  const response = await fetch(ApiRoutes.products.get("name", "asc"));
+async function getProducts(query: string) {
+  const response = await fetch(ApiRoutes.products.base + query);
 
   const { products } = await response.json();
 

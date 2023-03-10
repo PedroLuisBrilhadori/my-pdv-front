@@ -2,13 +2,13 @@ import { get } from "lodash";
 import { TableHeaderType, TableRowType } from "../types";
 import { renderColumnTypes } from "./columns-types";
 
+function Item<T>({ data, column }: { data: T; column: TableHeaderType }) {
+  const item = get(data, column.name);
+
+  return renderColumnTypes(item, column);
+}
+
 export const TableRow = <T,>({ dataSource, columns }: TableRowType<T>) => {
-  function Item({ data, column }: { data: T; column: TableHeaderType }) {
-    const item = get(data, column.name);
-
-    return renderColumnTypes(item, column);
-  }
-
   return (
     <>
       {dataSource.map((item, i) => (

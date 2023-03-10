@@ -13,7 +13,7 @@ export type TableHeaderType = {
   type: TableColumnType;
   booleanTransform?: { false: string; true: string };
   sort?: boolean;
-  sortListener?: (sort: SortState, name: string) => any;
+  sortListener?: (sort: SortState) => any;
 };
 
 export type TableRowType<T> = {

@@ -53,24 +53,24 @@ export const HeaderSort = ({
 
 export type UseSortType = [
   SortState,
-  (listener?: (state: SortState, name: string) => any, name?: string) => void
+  (listener?: (state: SortState) => any) => void
 ];
 
 export const useSort = (): UseSortType => {
   const [sortState, setSortState] = useState<SortState>(null);
 
-  function next(
-    listener?: (state: SortState, name: string) => any,
-    name?: string
-  ) {
+  function next(listener?: (state: SortState) => any) {
     let state = sortState;
 
     if (sortState === "asc") state = "desc";
     if (sortState === "desc") state = null;
     if (sortState === null) state = "asc";
 
-    if (listener) listener(state, name ?? "");
     setSortState(state);
+
+    setTimeout(() => {
+      if (listener) listener(state);
+    }, 600);
   }
 
   return [sortState, next];

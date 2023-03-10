@@ -13,6 +13,7 @@ export const ApiRoutes = {
     get: `${baseUrl}/user/`,
   },
   products: {
+    base: `${baseUrl}/products`,
     delete: (id: string) => `${baseUrl}/products/${id}`,
     put: (id: string) => `${baseUrl}/products/${id}`,
     create: `${baseUrl}/products`,
