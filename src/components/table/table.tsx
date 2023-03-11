@@ -1,8 +1,8 @@
 import { TableType } from "./types";
 import { TableHeader } from "./table-header";
-import { TableRow } from "./table-row";
+import { TableRows } from "./table-row";
 
-export const Table = <T,>({ dataSource, columns }: TableType<T>) => {
+export const Table = <T,>({ dataSource, columns, ...props }: TableType<T>) => {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full divide-y-2 divide-gray-200 text-sm">
@@ -11,7 +11,11 @@ export const Table = <T,>({ dataSource, columns }: TableType<T>) => {
         </thead>
 
         <tbody className="divide-y divide-gray-200">
-          <TableRow columns={columns} dataSource={dataSource} />
+          <TableRows
+            columns={columns}
+            dataSource={dataSource}
+            selectedRow={props.selectedRow}
+          />
         </tbody>
       </table>
     </div>

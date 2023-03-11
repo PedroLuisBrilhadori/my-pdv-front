@@ -1,22 +1,42 @@
 import { get } from "lodash";
-import { TableHeaderType, TableRowType } from "../types";
-import { renderColumnTypes } from "./columns-types";
+import { TableHeaderType, TableRowType, TableRowsType } from "../types";
+import { renderCell } from "./row-types";
 
-function Item<T>({ data, column }: { data: T; column: TableHeaderType }) {
-  const item = get(data, column.name);
+function Cell<T>({ row, column }: { row: T; column: TableHeaderType }) {
+  const cell = get(row, column.name);
 
-  return renderColumnTypes(item, column);
+  return renderCell(cell, column);
 }
 
-export const TableRow = <T,>({ dataSource, columns }: TableRowType<T>) => {
+const TableRow = <T,>({ columns, row, ...props }: TableRowType<T>) => {
+  return (
+    <tr
+      className="cursor-pointer transition duration-150 ease-in-out hover:bg-gray-200 focus:bg-gray-200  focus:outline-none focus:ring-0 active:bg-gray-300"
+      onClick={() => {
+        if (props.selectedRow) props.selectedRow(row);
+      }}
+    >
+      {columns.map((column, i) => (
+        <Cell key={i} row={row} column={column} />
+      ))}
+    </tr>
+  );
+};
+
+export const TableRows = <T,>({
+  dataSource,
+  columns,
+  ...props
+}: TableRowsType<T>) => {
   return (
     <>
-      {dataSource.map((item, i) => (
-        <tr key={i}>
-          {columns.map((column, i) => (
-            <Item key={i} data={item} column={column} />
-          ))}
-        </tr>
+      {dataSource.map((row, key) => (
+        <TableRow
+          key={key}
+          columns={columns}
+          row={row}
+          selectedRow={props.selectedRow}
+        />
       ))}
     </>
   );

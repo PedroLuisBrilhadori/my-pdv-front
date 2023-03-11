@@ -6,11 +6,8 @@ export const TableCell = ({ children }: { children: JSX.Element | string }) => {
   );
 };
 
-export function renderColumnTypes(
-  item: any,
-  column: TableHeaderType
-): JSX.Element {
-  const booleanColumn = () => {
+export function renderCell(item: any, column: TableHeaderType): JSX.Element {
+  const booleanCell = () => {
     const key = String(item) as "false" | "true";
     const content = column?.booleanTransform
       ? column.booleanTransform[key]
@@ -19,7 +16,7 @@ export function renderColumnTypes(
     return <TableCell>{content}</TableCell>;
   };
 
-  const currencyColumn = () => {
+  const currencyCell = () => {
     const formatter = Intl.NumberFormat("pt-br", {
       style: "currency",
       currency: "BRL",
@@ -31,9 +28,9 @@ export function renderColumnTypes(
 
   switch (column.type) {
     case TableColumnType.Boolean:
-      return booleanColumn();
+      return booleanCell();
     case TableColumnType.Currency:
-      return currencyColumn();
+      return currencyCell();
     default:
       return <TableCell>{item}</TableCell>;
   }

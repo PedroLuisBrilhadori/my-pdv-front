@@ -38,7 +38,13 @@ export default function Home() {
 
   return (
     <Page taskBar={true}>
-      <Table columns={columns} dataSource={dataSource}></Table>
+      <Table
+        columns={columns}
+        dataSource={dataSource}
+        selectedRow={(row) => {
+          console.log(row);
+        }}
+      ></Table>
     </Page>
   );
 }
