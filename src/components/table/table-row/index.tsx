@@ -1,6 +1,7 @@
 import { get } from "lodash";
-import { TableHeaderType, TableRowType, TableRowsType } from "../types";
-import { renderCell } from "./row-types";
+import { TableRowType, TableRowsType } from "../types";
+import { renderCell } from "./cell";
+import { TableHeaderType } from "../table-header";
 
 function Cell<T>({ row, column }: { row: T; column: TableHeaderType }) {
   const cell = get(row, column.name);

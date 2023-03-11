@@ -1,14 +1,14 @@
-import { HeaderSort, useSort } from "../sort";
-import { TableHeaderType } from "../types";
+import { ColumnSortTitle, useSort } from "../sort";
+import { TableHeaderType } from "./types";
 
-function Item({ displayName, ...props }: TableHeaderType) {
+function ColumnTitle({ displayName, ...props }: TableHeaderType) {
   const sort = props.sort ? true : false;
   const [sortState, next] = useSort();
 
   return (
     <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
       {sort ? (
-        <HeaderSort
+        <ColumnSortTitle
           displayName={displayName}
           sortState={sortState}
           onClick={() => next(props.sortListener)}
@@ -24,7 +24,7 @@ export const TableHeader = ({ columns }: { columns: TableHeaderType[] }) => {
   return (
     <tr>
       {columns.map((column, key) => (
-        <Item
+        <ColumnTitle
           name={column.name}
           displayName={column.displayName}
           type={column.type}

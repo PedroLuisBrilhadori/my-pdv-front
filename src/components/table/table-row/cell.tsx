@@ -1,4 +1,4 @@
-import { TableColumnType, TableHeaderType } from "../types";
+import { TableColumnType, TableHeaderType } from "../table-header";
 
 export const TableCell = ({ children }: { children: JSX.Element | string }) => {
   return (
