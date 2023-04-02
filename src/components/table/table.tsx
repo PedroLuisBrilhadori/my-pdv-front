@@ -1,10 +1,11 @@
 import { TableType } from "./types";
 import { TableHeader } from "./table-header";
 import { TableRows } from "./table-row";
+import { Paginator } from "./paginator";
 
 export const Table = <T,>({ dataSource, columns, ...props }: TableType<T>) => {
   return (
-    <div className="overflow-x-auto">
+    <div>
       <table className="min-w-full divide-y-2 divide-gray-200 text-sm">
         <thead>
           <TableHeader columns={columns} />
@@ -18,6 +19,13 @@ export const Table = <T,>({ dataSource, columns, ...props }: TableType<T>) => {
           />
         </tbody>
       </table>
+      <div className="w-full h-8">
+        <Paginator
+          pageChange={props.pageChange}
+          maxChange={props.maxChange}
+          maxPage={props.total}
+        />
+      </div>
     </div>
   );
 };

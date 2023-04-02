@@ -40,14 +40,14 @@ export function AuthProvider({ children }: any) {
     };
 
     if (token) {
-      fetchUser().catch((error) => console.error(error));
+      // fetchUser().catch((error) => console.error(error));
     } else {
       Router.push("/login");
     }
   }, []);
 
   async function signIn({ email, password }: SignInData) {
-    const request = await fetch(ApiRoutes.user.login, {
+    const request = await fetch(ApiRoutes.auth.login, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -56,9 +56,11 @@ export function AuthProvider({ children }: any) {
       }),
     });
 
-    const { success, token, user, message } = await request.json();
+    const { token, user, message } = await request.json();
 
-    if (!success) throw { message, status: request.status };
+    console.log(user);
+
+    if (!token) throw { message, status: request.status };
 
     setCookie(undefined, "nextauth.token", token, {
       maxAge: 60 * 60 * 1, // 1 hour

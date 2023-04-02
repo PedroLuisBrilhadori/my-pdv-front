@@ -1,3 +1,4 @@
+import { PaginatorType } from "./paginator";
 import { TableHeaderType } from "./table-header";
 
 export type TableRowType<T> = {
@@ -16,4 +17,7 @@ export type TableType<T> = {
   dataSource: T[];
   columns: TableHeaderType[];
   selectedRow?: (row: T) => any;
+  total: number;
+  pageChange: (page: number) => void;
+  maxChange: (max: number) => void;
 };

@@ -1,15 +1,14 @@
-import { GetServerSidePropsContext, PreviewData } from "next";
 import { parseCookies } from "nookies";
-import { ParsedUrlQuery } from "querystring";
 
 export const headers: Headers = new Headers();
 
-const baseUrl = `https://localhost:3001/api`;
+const baseUrl = `https://localhost:3001`;
 
 export const ApiRoutes = {
+  auth: {
+    login: `${baseUrl}/auth/login`,
+  },
   user: {
-    login: `${baseUrl}/user/login`,
-    register: `${baseUrl}/user/register`,
     get: `${baseUrl}/user/`,
   },
   products: {
