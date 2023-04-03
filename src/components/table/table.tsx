@@ -23,7 +23,8 @@ export const Table = <T,>({ dataSource, columns, ...props }: TableType<T>) => {
         <Paginator
           pageChange={props.pageChange}
           maxChange={props.maxChange}
-          maxPage={props.total}
+          maxPage={props.max}
+          total={props.total}
         />
       </div>
     </div>

@@ -32,10 +32,9 @@ export default function Home() {
 
   const [dataSource, setDataSource] = useState({
     data: [],
+    total: 0,
     totalPages: 0,
   });
-
-  console.log(query.query);
 
   useEffect(() => {
     const token = getToken();
@@ -43,6 +42,7 @@ export default function Home() {
       getProducts(productsQuery).then(({ data, total }) => {
         setDataSource({
           data,
+          total,
           totalPages: Math.floor(
             (total + query.maxItems() - 1) / query.maxItems()
           ),
@@ -54,7 +54,8 @@ export default function Home() {
   return (
     <Page taskBar={true}>
       <Table
-        total={dataSource.totalPages}
+        total={dataSource.total}
+        max={dataSource.totalPages}
         pageChange={(page) => setQuery(query.changePage(page))}
         maxChange={(max) => setQuery(query.changeMax(max))}
         columns={columns}

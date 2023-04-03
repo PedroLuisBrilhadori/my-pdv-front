@@ -18,6 +18,7 @@ export type TableType<T> = {
   columns: TableHeaderType[];
   selectedRow?: (row: T) => any;
   total: number;
+  max: number;
   pageChange: (page: number) => void;
   maxChange: (max: number) => void;
 };

@@ -8,9 +8,13 @@ import {
 
 export const Paginator = ({ maxPage, ...props }: PaginatorType) => {
   return (
-    <div className="flex justify-end items-center px-[12px] gap-3">
-      <Selector onChange={props.maxChange} />
-      <ActionButtons maxPage={maxPage} pageChange={props.pageChange} />
+    <div className="flex justify-between items-center px-4 border-y-gray-200 border-y-2 py-2">
+      <div>total de itens: {props.total}</div>
+
+      <div className="flex justify-end gap-3">
+        <Selector onChange={props.maxChange} />
+        <ActionButtons maxPage={maxPage} pageChange={props.pageChange} />
+      </div>
     </div>
   );
 };
