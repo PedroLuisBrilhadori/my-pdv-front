@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
-import {
-  Page,
-  SortState,
-  Table,
-  TableColumnType,
-  TableHeaderType,
-} from "../components";
+import { Page, Table, TableColumnType, TableHeaderType } from "../components";
 import { ApiRoutes, getToken } from "../services/api";
-import { PaginatorType } from "../components/table/paginator";
+import { Query } from "../utils";
 
 export default function Home() {
   const [query, st] = useState(new Query(1, 5));
@@ -19,14 +13,14 @@ export default function Home() {
       displayName: "Nome",
       type: TableColumnType.String,
       sort: true,
-      sortListener: (state) => setQuery(query.orderName(state)),
+      sortListener: (state) => setQuery(query.order("name", state)),
     },
     {
       name: "price",
       displayName: "Preço",
       type: TableColumnType.Currency,
       sort: true,
-      sortListener: (state) => setQuery(query.orderPrice(state)),
+      sortListener: (state) => setQuery(query.order("price", state)),
     },
     {
       name: "unit",
@@ -46,7 +40,7 @@ export default function Home() {
   useEffect(() => {
     const token = getToken();
     if (token) {
-      getProducts(productsQuery).then(({ data, total, page }) => {
+      getProducts(productsQuery).then(({ data, total }) => {
         setDataSource({
           data,
           totalPages: Math.floor(
@@ -71,52 +65,6 @@ export default function Home() {
       ></Table>
     </Page>
   );
-}
-class Query {
-  private page: number;
-  private max: number;
-  query: string;
-
-  constructor(page: number, max: number) {
-    this.page = page;
-    this.max = max;
-
-    this.query = `?page=${this.page}&max=${this.max}`;
-  }
-
-  maxItems() {
-    return this.max;
-  }
-
-  orderName(name: SortState) {
-    if (name) this.query = `?page=${this.page}&max=${this.max}?name=${name}`;
-    else this.defaultQuery();
-
-    return this.query;
-  }
-
-  orderPrice(price: SortState) {
-    if (price) this.query = `?page=${this.page}&max=${this.max}?price=${price}`;
-    else this.defaultQuery();
-
-    return this.query;
-  }
-
-  changePage(page: number) {
-    this.page = page;
-    this.query = `?page=${this.page}&max=${this.max}`;
-    return this.query;
-  }
-
-  changeMax(max: number) {
-    this.max = max;
-    this.query = `?page=${this.page}&max=${this.max}`;
-    return this.query;
-  }
-
-  private defaultQuery() {
-    this.query = `?page=${this.page}&max=${this.max}`;
-  }
 }
 
 async function getProducts(query: string) {
