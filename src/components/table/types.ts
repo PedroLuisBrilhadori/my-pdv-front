@@ -1,4 +1,4 @@
-import { PaginatorType } from "./paginator";
+import { SearchType } from "./search/types";
 import { TableHeaderType } from "./table-header";
 
 export type TableRowType<T> = {
@@ -21,4 +21,5 @@ export type TableType<T> = {
   max: number;
   pageChange: (page: number) => void;
   maxChange: (max: number) => void;
+  search: SearchType;
 };
