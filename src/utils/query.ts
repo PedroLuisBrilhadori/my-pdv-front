@@ -49,6 +49,15 @@ export class Query {
     return this.query;
   }
 
+  search(search: string) {
+    if (!search) return this.defaultQuery();
+
+    this.removeQuery("search");
+    this.query = this.addQuery(`search=${search}`);
+
+    return this.query;
+  }
+
   private removeQuery(name: string) {
     this.query = this.query
       .split("&")
@@ -64,7 +73,6 @@ export class Query {
   }
 
   private isDefault() {
-    console.log(this.query.split("&"));
     return this.query.split("&").length === 2;
   }
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Page, Table, TableColumnType, TableHeaderType } from "../components";
 import { ApiRoutes, getToken } from "../services/api";
 import { Query } from "../utils";
+import { InputType } from "../components/table/search/types";
 
 export default function Home() {
   const [query, st] = useState(new Query(1, 5));
@@ -29,6 +30,12 @@ export default function Home() {
       booleanTransform: { true: "Unidade", false: "Kg" },
     },
   ];
+
+  const input: InputType = {
+    placeholder: "Buscar Produto...",
+    label: "Buscar Produto",
+    onChange: ({ target: { value } }) => setQuery(query.search(value)),
+  };
 
   const [dataSource, setDataSource] = useState({
     data: [],
@@ -63,6 +70,7 @@ export default function Home() {
         selectedRow={(row) => {
           console.log(row);
         }}
+        search={{ input }}
       ></Table>
     </Page>
   );
