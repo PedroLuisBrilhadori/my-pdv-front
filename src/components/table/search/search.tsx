@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { SearchType, InputType } from "./types";
 
 export const Search = ({ input }: SearchType) => {
@@ -17,6 +17,14 @@ export const Search = ({ input }: SearchType) => {
 const Input = ({ label, ...props }: InputType) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [trash, setTrash] = useState(false);
+
+  useEffect(() => {
+    if (!trash && props.onChange) {
+      props.onChange({
+        target: { value: "" },
+      } as ChangeEvent<HTMLInputElement>);
+    }
+  }, [trash, props]);
 
   return (
     <div className="w-full">
