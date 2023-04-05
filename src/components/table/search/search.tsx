@@ -18,14 +18,6 @@ const Input = ({ label, ...props }: InputType) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [trash, setTrash] = useState(false);
 
-  useEffect(() => {
-    if (!trash && props.onChange) {
-      props.onChange({
-        target: { value: "" },
-      } as ChangeEvent<HTMLInputElement>);
-    }
-  }, [trash, props]);
-
   return (
     <div className="w-full">
       <label htmlFor="simple-search" className="sr-only">
@@ -52,6 +44,11 @@ const Input = ({ label, ...props }: InputType) => {
             onClick={() => {
               if (inputRef.current?.value) inputRef.current.value = "";
               setTrash(false);
+
+              if (props.onChange)
+                props.onChange({
+                  target: { value: "" },
+                } as ChangeEvent<HTMLInputElement>);
             }}
           >
             <span className="material-symbols-outlined text-gray-500 rounded-full transition-all hover:bg-gray-300 active:bg-gray-400 cursor-pointer select-none">

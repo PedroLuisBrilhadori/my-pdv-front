@@ -50,7 +50,7 @@ export class Query {
   }
 
   search(search: string) {
-    if (!search) return this.defaultQuery();
+    if (search.length === 0) return this.defaultQuery();
 
     this.removeQuery("search");
     this.query = this.addQuery(`search=${search}`);
