@@ -20,13 +20,14 @@ const Input = ({ label, ...props }: InputType) => {
 
   return (
     <div className="w-full">
-      <label htmlFor="simple-search" className="sr-only">
+      <label htmlFor="table-search-input" className="sr-only">
         {label}
       </label>
       <div className="relative w-full">
         <input
           type="text"
-          id="simple-search"
+          id="table-search-input"
+          aria-label="table-search-input"
           className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder={props.placeholder}
           onChange={(e) => {

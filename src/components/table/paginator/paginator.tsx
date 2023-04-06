@@ -26,6 +26,7 @@ export const Selector = ({ onChange }: SelectorType) => {
   return (
     <div>
       <select
+        aria-label="table-max-change"
         className="cursor-pointer bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5"
         onChange={(e) => {
           onChange(Number(e.target.value));
@@ -77,7 +78,11 @@ export const NavigateButton = ({ type, ...props }: NavigateButtonType) => {
   const arrowStyle = props.disabled ? `text-slate-500` : ``;
 
   return (
-    <a className={`w-[24px] h-[24px] ${cursorStyle}`} onClick={onClick}>
+    <a
+      aria-label={`table-navigate-${type}`}
+      className={`w-[24px] h-[24px] ${cursorStyle}`}
+      onClick={onClick}
+    >
       <span className={`material-symbols-outlined ${arrowStyle}`}>
         navigate_{type}
       </span>

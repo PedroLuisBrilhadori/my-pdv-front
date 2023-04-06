@@ -22,7 +22,13 @@ export const mockDataSource: mockUserData[] = [
 ];
 
 export const mockColumns: TableHeaderType[] = [
-  { name: "name", displayName: "Name", type: TableColumnType.String },
+  {
+    name: "name",
+    displayName: "Name",
+    type: TableColumnType.String,
+    sort: true,
+    sortListener: (sort) => console.log(sort),
+  },
   { name: "age", displayName: "Age", type: TableColumnType.Number },
 ];
 
@@ -30,6 +36,7 @@ export const mockSearch: SearchType = {
   input: {
     placeholder: "Search User...",
     label: "Search User",
+    onChange: (search) => search,
   },
 };
 

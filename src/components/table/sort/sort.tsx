@@ -28,7 +28,11 @@ export const SortIcon = ({ state }: SortIconType) => {
 
 export const ColumnSortTitle = ({ onClick, ...props }: ColumnSortTitleType) => {
   return (
-    <div className="flex items-center cursor-pointer w-fit" onClick={onClick}>
+    <div
+      aria-label={`table-sort-${props.displayName}`}
+      className="flex items-center cursor-pointer w-fit"
+      onClick={onClick}
+    >
       {props.displayName}
       <SortIcon state={props.sortState} />
     </div>
