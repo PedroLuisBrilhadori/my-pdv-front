@@ -1,28 +1,19 @@
-import { Table } from "../components";
-import { mockTableProps } from "../components/table/mocks";
+import { Paginator, PaginatorType } from "../components/table/paginator";
 
 const Test = () => {
-  const {
-    dataSource,
-    columns,
-    total,
-    max,
-    search,
-    pageChange,
-    maxChange,
-    selectedRow,
-  } = mockTableProps;
+  const mockPaginatorProps: PaginatorType = {
+    total: 12,
+    maxPage: 3,
+    maxChange: (max) => max,
+    pageChange: (page) => page,
+  };
 
   return (
-    <Table
-      dataSource={dataSource}
-      columns={columns}
-      total={total}
-      max={max}
-      search={search}
-      pageChange={pageChange}
-      maxChange={maxChange}
-      selectedRow={selectedRow}
+    <Paginator
+      total={mockPaginatorProps.total}
+      maxPage={mockPaginatorProps.maxPage}
+      maxChange={mockPaginatorProps.maxChange}
+      pageChange={mockPaginatorProps.pageChange}
     />
   );
 };
