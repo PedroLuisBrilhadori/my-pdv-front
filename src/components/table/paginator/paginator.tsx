@@ -8,7 +8,10 @@ import {
 
 export const Paginator = ({ maxPage, ...props }: PaginatorType) => {
   return (
-    <div className="flex justify-between items-center px-4 border-y-gray-200 border-y-2 py-2">
+    <div
+      aria-label="table-paginator"
+      className="flex justify-between items-center px-4 border-y-gray-200 border-y-2 py-2"
+    >
       <div>total de itens: {props.total}</div>
 
       <div className="flex justify-end gap-3">

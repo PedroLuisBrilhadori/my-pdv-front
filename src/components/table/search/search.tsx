@@ -1,9 +1,9 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { SearchType, InputType } from "./types";
 
 export const Search = ({ input }: SearchType) => {
   return (
-    <div className="flex items-center">
+    <div aria-label="table-search" className="flex items-center">
       <Input
         placeholder={input.placeholder}
         label={input.label}
