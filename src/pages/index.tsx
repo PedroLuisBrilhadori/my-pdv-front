@@ -19,14 +19,14 @@ export default function Home() {
       displayName: "Nome",
       type: TableColumnType.String,
       sort: true,
-      sortListener: (state) => setQuery(query.order("name", state)),
+      sortListener: (state, name) => setQuery(query.order(name, state)),
     },
     {
       name: "price",
       displayName: "Preço",
       type: TableColumnType.Currency,
       sort: true,
-      sortListener: (state) => setQuery(query.order("price", state)),
+      sortListener: (state, name) => setQuery(query.order(name, state)),
     },
     {
       name: "unit",

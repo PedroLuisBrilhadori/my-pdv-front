@@ -6,7 +6,7 @@ export type SortIconType = {
 
 export type UseSortType = [
   SortState,
-  (listener?: (state: SortState) => any) => void
+  (listener?: (state: SortState, name: string) => any) => void
 ];
 
 export type ColumnSortTitleType = {

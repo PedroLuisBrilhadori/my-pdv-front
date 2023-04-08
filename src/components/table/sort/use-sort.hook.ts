@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { SortState, UseSortType } from "./types";
 
-export const useSort = (): UseSortType => {
+export const useSort = (name: string): UseSortType => {
   const [sortState, setSortState] = useState<SortState>(null);
 
-  function next(listener?: (state: SortState) => any) {
+  function next(listener?: (state: SortState, name: string) => any) {
     let state = sortState;
 
     if (sortState === "asc") state = "desc";
@@ -14,7 +14,7 @@ export const useSort = (): UseSortType => {
     setSortState(state);
 
     setTimeout(() => {
-      if (listener) listener(state);
+      if (listener) listener(state, name);
     }, 600);
   }
 

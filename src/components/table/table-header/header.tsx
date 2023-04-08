@@ -3,7 +3,7 @@ import { TableHeaderType } from "./types";
 
 function ColumnTitle({ displayName, ...props }: TableHeaderType) {
   const sort = props.sort ? true : false;
-  const [sortState, next] = useSort();
+  const [sortState, next] = useSort(props.name);
 
   return (
     <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">

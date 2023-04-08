@@ -13,5 +13,5 @@ export type TableHeaderType = {
   type: TableColumnType;
   booleanTransform?: { false: string; true: string };
   sort?: boolean;
-  sortListener?: (sort: SortState) => any;
+  sortListener?: (sort: SortState, name: string) => any;
 };
