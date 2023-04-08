@@ -1,11 +1,7 @@
 import { useEffect } from "react";
+import { DialogHeaderType, DialogType } from "./types";
 
-export type DialogType = {
-  dialog: JSX.Element;
-  unSetDialog: () => void;
-};
-
-export const Dialog = ({ dialog, unSetDialog }: DialogType) => {
+export const Dialog = ({ dialog, unSetDialog, title }: DialogType) => {
   useEffect(() => {
     const bind = (e: any) => {
       if (e.keyCode !== 27) {
@@ -28,17 +24,12 @@ export const Dialog = ({ dialog, unSetDialog }: DialogType) => {
 
   return (
     <div className="flex items-center justify-center fixed top-0 left-0 right-0 bottom-0 bg-p-background">
-      <div className="py-3 bg-gray-100 shadow-xl flex flex-col rounded-lg">
-        <DialogHeader unSetDialog={unSetDialog} title="Teste" />
+      <div className="py-3 bg-gray-100 shadow-xl flex flex-col rounded-lg ">
+        <DialogHeader unSetDialog={unSetDialog} title={title} />
         <div className="pt-3 px-3">{dialog}</div>
       </div>
     </div>
   );
-};
-
-export type DialogHeaderType = {
-  unSetDialog: () => void;
-  title: string;
 };
 
 const DialogHeader = ({ unSetDialog, ...props }: DialogHeaderType) => {

@@ -1,15 +1,17 @@
-import { createContext, useCallback, useEffect, useState } from "react";
-import { Dialog, DialogType } from "../components";
+import { createContext, useCallback, useState } from "react";
+import { Dialog } from "../components";
 
-export const DialogContext = createContext(
-  {} as {
-    unSetDialog: () => void;
-    setDialog: (dialog: JSX.Element) => void;
-  }
-);
+export type SetDialogType = { dialog: JSX.Element; title?: string };
+
+export type DialogContextType = {
+  unSetDialog: () => void;
+  setDialog: (dialog: SetDialogType) => void;
+};
+
+export const DialogContext = createContext({} as DialogContextType);
 
 export const DialogProvider = (props: any) => {
-  const [dialog, setDialog] = useState<JSX.Element>();
+  const [dialog, setDialog] = useState<SetDialogType>();
 
   const unSetDialog = useCallback(() => {
     setDialog(undefined);
@@ -18,7 +20,13 @@ export const DialogProvider = (props: any) => {
   return (
     <DialogContext.Provider value={{ unSetDialog, setDialog }} {...props}>
       {props.children}
-      {dialog && <Dialog dialog={dialog} unSetDialog={unSetDialog} />}
+      {dialog && (
+        <Dialog
+          dialog={dialog.dialog}
+          unSetDialog={unSetDialog}
+          title={dialog.title}
+        />
+      )}
     </DialogContext.Provider>
   );
 };
