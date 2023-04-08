@@ -83,7 +83,7 @@ export const NavigateButton = ({ type, ...props }: NavigateButtonType) => {
       className={`w-[24px] h-[24px] ${cursorStyle}`}
       onClick={onClick}
     >
-      <span className={`material-symbols-outlined ${arrowStyle}`}>
+      <span className={`material-icons-outlined ${arrowStyle}`}>
         navigate_{type}
       </span>
     </a>

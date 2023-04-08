@@ -5,6 +5,6 @@ type IconType = {
 
 export const Icon = ({ children, className }: IconType) => {
   return (
-    <span className={`material-symbols-outlined ${className}`}>{children}</span>
+    <span className={`material-icons-outlined ${className}`}>{children}</span>
   );
 };

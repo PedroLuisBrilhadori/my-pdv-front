@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "material-icons/iconfont/material-icons.css";
 
 body {
   margin: 0;

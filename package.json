@@ -13,6 +13,7 @@
     "@next/font": "13.1.1",
     "animate.css": "^4.1.1",
     "lodash": "^4.17.21",
+    "material-icons": "^1.13.4",
     "next": "13.1.1",
     "nookies": "^2.5.2",
     "react": "18.2.0",

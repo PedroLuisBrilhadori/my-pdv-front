@@ -52,7 +52,7 @@ const Input = ({ label, ...props }: InputType) => {
                 } as ChangeEvent<HTMLInputElement>);
             }}
           >
-            <span className="material-symbols-outlined text-gray-500 rounded-full transition-all hover:bg-gray-300 active:bg-gray-400 cursor-pointer select-none">
+            <span className="material-icons-outlined text-gray-500 rounded-full transition-all hover:bg-gray-300 active:bg-gray-400 cursor-pointer select-none">
               close
             </span>
           </div>
