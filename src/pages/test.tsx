@@ -3,7 +3,7 @@ import { Paginator, PaginatorType } from "../components/table/paginator";
 const Test = () => {
   const mockPaginatorProps: PaginatorType = {
     total: 12,
-    maxPage: 3,
+    maxPage: 2,
     maxChange: (max) => max,
     pageChange: (page) => page,
   };
