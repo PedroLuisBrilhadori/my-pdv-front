@@ -42,7 +42,7 @@ export function AuthProvider({ children }: any) {
     if (token) {
       // fetchUser().catch((error) => console.error(error));
     } else {
-      Router.push("/login");
+      // Router.push("/login");
     }
   }, []);
 

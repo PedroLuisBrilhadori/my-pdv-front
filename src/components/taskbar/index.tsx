@@ -35,7 +35,7 @@ export const TaskBarIcon = ({ icon, color, ...props }: TaskBarIconType) => {
 
   return (
     <div className={`w-icon rounded mr-5 pt-1 ${customStyle}`}>
-      <span className="material-symbols-outlined">{icon}</span>
+      <span className="material-icons-outlined">{icon}</span>
     </div>
   );
 };

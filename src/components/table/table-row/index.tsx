@@ -1,13 +1,5 @@
-import { get } from "lodash";
 import { TableRowType, TableRowsType } from "../types";
-import { renderCell } from "./cell";
-import { TableHeaderType } from "../table-header";
-
-function Cell<T>({ row, column }: { row: T; column: TableHeaderType }) {
-  const cell = get(row, column.name);
-
-  return renderCell(cell, column);
-}
+import { Cell } from "./cell";
 
 const TableRow = <T,>({ columns, row, ...props }: TableRowType<T>) => {
   return (

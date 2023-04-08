@@ -1,9 +1,9 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { SearchType, InputType } from "./types";
 
 export const Search = ({ input }: SearchType) => {
   return (
-    <div className="flex items-center">
+    <div aria-label="table-search" className="flex items-center">
       <Input
         placeholder={input.placeholder}
         label={input.label}
@@ -20,13 +20,14 @@ const Input = ({ label, ...props }: InputType) => {
 
   return (
     <div className="w-full">
-      <label htmlFor="simple-search" className="sr-only">
+      <label htmlFor="table-search-input" className="sr-only">
         {label}
       </label>
       <div className="relative w-full">
         <input
           type="text"
-          id="simple-search"
+          id="table-search-input"
+          aria-label="table-search-input"
           className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder={props.placeholder}
           onChange={(e) => {
@@ -51,7 +52,7 @@ const Input = ({ label, ...props }: InputType) => {
                 } as ChangeEvent<HTMLInputElement>);
             }}
           >
-            <span className="material-symbols-outlined text-gray-500 rounded-full transition-all hover:bg-gray-300 active:bg-gray-400 cursor-pointer select-none">
+            <span className="material-icons-outlined text-gray-500 rounded-full transition-all hover:bg-gray-300 active:bg-gray-400 cursor-pointer select-none">
               close
             </span>
           </div>
