@@ -22,7 +22,7 @@ export const Table = <T,>({ dataSource, columns, ...props }: TableType<T>) => {
           />
         </tbody>
       </table>
-      <div className="w-full h-8">
+      <div className="w-full">
         <Paginator
           pageChange={props.pageChange}
           maxChange={props.maxChange}

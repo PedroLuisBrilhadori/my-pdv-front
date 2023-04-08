@@ -1,4 +1,5 @@
 import { useDialog } from "../../hooks";
+import { DialogTable } from "../dialog-table";
 
 export const Cart = () => {
   const { setDialog } = useDialog();
@@ -13,7 +14,10 @@ export const Cart = () => {
       <div
         className="cursor-pointer"
         onClick={() => {
-          setDialog(<div> teste </div>);
+          setDialog({
+            dialog: <DialogTable />,
+            title: "Produtos",
+          });
         }}
       >
         + new item
