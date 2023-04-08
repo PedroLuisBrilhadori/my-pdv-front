@@ -16,6 +16,7 @@ module.exports = {
         "p-yellow": "#E1BC29",
         "p-green": "#3BB273",
         "p-purple": "#7768AE",
+        "p-background": "#00000080",
       },
       spacing: {
         icon: "30px",
