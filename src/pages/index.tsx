@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
-import { Page, Table, TableColumnType, TableHeaderType } from "../components";
+import {
+  Page,
+  Table,
+  TableColumnType,
+  TableHeaderType,
+  InputType,
+} from "../components";
 import { ApiRoutes, getToken } from "../services/api";
 import { Query } from "../utils";
-import { InputType } from "../components/table/search/types";
 
 export default function Home() {
   const [query, st] = useState(new Query(1, 5));
