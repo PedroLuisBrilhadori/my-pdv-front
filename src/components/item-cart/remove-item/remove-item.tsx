@@ -1,3 +1,4 @@
+import { ButtonIcon } from "../../icons";
 import { Item } from "../types";
 
 type RemoveItem = {
@@ -7,15 +8,13 @@ type RemoveItem = {
 
 export const RemoveItem = ({ onDeleted, item }: RemoveItem) => {
   return (
-    <div>
-      <a
-        className="cursor-pointer"
-        onClick={() => {
-          if (onDeleted) onDeleted(item);
-        }}
-      >
-        <span className="material-icons-outlined text-p-red">delete</span>
-      </a>
-    </div>
+    <ButtonIcon
+      onClick={() => {
+        if (onDeleted) onDeleted(item);
+      }}
+      className="text-p-red active:bg-red-200 active:shadow-lg"
+    >
+      delete
+    </ButtonIcon>
   );
 };
