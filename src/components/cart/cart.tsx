@@ -1,7 +1,10 @@
 import { useDialog } from "../../hooks";
-import { DialogTable } from "../dialog-table";
+import { Item, ItemType } from "./item";
+import { SetDialogType } from "../../context/dialog-context";
 
-export const Cart = () => {
+export type CartType = { dialog: SetDialogType; items: ItemType[] };
+
+export const Cart = ({ dialog, items }: CartType) => {
   const { setDialog } = useDialog();
 
   return (
@@ -14,10 +17,7 @@ export const Cart = () => {
       <div
         className="cursor-pointer"
         onClick={() => {
-          setDialog({
-            dialog: <DialogTable />,
-            title: "Produtos",
-          });
+          setDialog(dialog);
         }}
       >
         + new item
@@ -25,43 +25,24 @@ export const Cart = () => {
 
       <div className="mt-6 space-y-6">
         <ul className="space-y-4">
-          <Item></Item>
-          <Item></Item>
-          <Item></Item>
+          {items.map((item, i) => {
+            return (
+              <Item
+                key={i}
+                name={item.name}
+                quantity={item.quantity}
+                price={item.price}
+              />
+            );
+          })}
         </ul>
 
         <div className="space-y-4 text-center">
           <a className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600">
-            Checkout
+            Finalizar Compra
           </a>
         </div>
       </div>
     </div>
-  );
-};
-
-export const Item = () => {
-  return (
-    <li className="flex items-center gap-4">
-      <div className="h-16 w-16 bg-black rounded"></div>
-
-      <div>
-        <h3 className="text-sm text-gray-900">Basic Tee 6-Pack</h3>
-
-        <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
-          <div>
-            <dt className="inline">Size: </dt>
-            <dd className="inline">XXS</dd>
-          </div>
-
-          <div>
-            <dt className="inline">Color:</dt>
-            <dd className="inline">White</dd>
-          </div>
-        </dl>
-      </div>
-
-      <div></div>
-    </li>
   );
 };

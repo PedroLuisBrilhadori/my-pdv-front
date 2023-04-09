@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { InputType, Table, TableColumnType, TableHeaderType } from "../table";
 import { Query } from "../../utils";
 import { ApiRoutes, getToken } from "../../services/api";
+import { DialogTableType } from "./types";
 
-export const DialogTable = () => {
+export const DialogTable = <T,>({ selectedRow }: DialogTableType<T>) => {
   const [query, st] = useState(new Query(1, 5));
   const [productsQuery, setQuery] = useState(query.query);
 
@@ -63,9 +64,7 @@ export const DialogTable = () => {
         maxChange={(max) => setQuery(query.changeMax(max))}
         columns={columns}
         dataSource={dataSource.data}
-        selectedRow={(row) => {
-          console.log(row);
-        }}
+        selectedRow={selectedRow}
         search={{ input }}
       ></Table>
     </div>
