@@ -45,6 +45,9 @@ const Home = () => {
         dialog={cart.dialog}
         cards={cart.cards}
         onItemDeleted={cart.onItemDeleted}
+        onClearItems={() => {
+          setItems([]);
+        }}
       />
     </Page>
   );
