@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { Cart, CartType, Page } from "../components";
-import { DialogTable } from "../components/dialog-table";
+import { TableDialog } from "../components/table-dialog";
 import { Product } from "./table";
 import { ItemType } from "../components/cart/item";
 import { DialogContext } from "../context/dialog-context";
@@ -26,7 +26,7 @@ const Home = () => {
   const cart: CartType = {
     dialog: {
       dialog: (
-        <DialogTable
+        <TableDialog
           selectedRow={(row: Product) => {
             addItem(row, setItems);
             unSetDialog();

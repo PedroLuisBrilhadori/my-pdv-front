@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { InputType, Table, TableColumnType, TableHeaderType } from "../table";
 import { Query } from "../../utils";
 import { ApiRoutes, getToken } from "../../services/api";
-import { DialogTableType } from "./types";
+import { TableDialogType } from "./types";
 
-export const DialogTable = <T,>({ selectedRow }: DialogTableType<T>) => {
+export const TableDialog = <T,>({ selectedRow }: TableDialogType<T>) => {
   const [query, st] = useState(new Query(1, 5));
   const [productsQuery, setQuery] = useState(query.query);
 
