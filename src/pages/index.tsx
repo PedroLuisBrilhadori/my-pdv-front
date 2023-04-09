@@ -1,24 +1,28 @@
 import { Dispatch, SetStateAction, useContext, useState } from "react";
-import { Cart, CartType, Page, TableDialog, ItemType } from "../components";
+import { Cart, CartType, Page, TableDialog, CardItemType } from "../components";
 import { Product } from "./table";
 import { DialogContext } from "../context/dialog-context";
 
-const addItem = (
-  product: Product,
-  setItems: Dispatch<SetStateAction<ItemType[]>>
+const selectedRow = (
+  row: Product,
+  cards: CardItemType[],
+  setItems: Dispatch<SetStateAction<CardItemType[]>>
 ) => {
-  setItems((prev) => [
-    ...prev,
-    {
-      quantity: 0,
-      name: product.name,
-      price: product.price,
+  const { name, price } = row;
+  cards.push({
+    item: { name, price, quantity: 0, key: String(Math.random()) },
+    onDelete: (item) => {
+      const filtered = cards.filter((card) => {
+        return card.item.key !== item.key;
+      });
+
+      setItems(filtered);
     },
-  ]);
+  });
 };
 
 const Home = () => {
-  const [items, setItems] = useState<ItemType[]>([]);
+  const [cards, setItems] = useState<CardItemType[]>([]);
   const { unSetDialog } = useContext(DialogContext);
 
   const cart: CartType = {
@@ -26,7 +30,7 @@ const Home = () => {
       dialog: (
         <TableDialog
           selectedRow={(row: Product) => {
-            addItem(row, setItems);
+            selectedRow(row, cards, setItems);
             unSetDialog();
           }}
         />
@@ -34,12 +38,12 @@ const Home = () => {
       title: "Produtos",
     },
 
-    items: items,
+    cards: cards,
   };
 
   return (
     <Page taskBar={true}>
-      <Cart dialog={cart.dialog} items={cart.items} />
+      <Cart dialog={cart.dialog} cards={cart.cards} />
     </Page>
   );
 };

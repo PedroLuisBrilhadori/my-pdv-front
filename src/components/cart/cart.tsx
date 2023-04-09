@@ -1,13 +1,13 @@
 import { useDialog } from "../../hooks";
-import { Item } from "./item";
+import { CartItem } from "./item";
 import { CartType } from "./types";
 
-export const Cart = ({ dialog, items }: CartType) => {
+export const Cart = ({ dialog, cards }: CartType) => {
   const { setDialog } = useDialog();
 
   return (
     <div
-      className="w-full ronded bg-gray-100 p-4 pt-4 sm:p-6 lg:p-8"
+      className="w-full ronded bg-gray-100 p-4 pt-4 sm:p-6 lg:p-8 gap-5 flex flex-col justify-between"
       aria-modal="true"
       role="dialog"
       tabIndex={1}
@@ -21,25 +21,24 @@ export const Cart = ({ dialog, items }: CartType) => {
         + new item
       </div>
 
-      <div className="mt-6 space-y-6">
+      <div className="overflow-y-scroll h-[25em]">
         <ul className="space-y-4">
-          {items.map((item, i) => {
+          {cards.map((card, i) => {
             return (
-              <Item
-                key={i}
-                name={item.name}
-                quantity={item.quantity}
-                price={item.price}
+              <CartItem
+                key={card.item.key}
+                item={card.item}
+                onDelete={card.onDelete}
               />
             );
           })}
         </ul>
+      </div>
 
-        <div className="space-y-4 text-center">
-          <a className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600">
-            Finalizar Compra
-          </a>
-        </div>
+      <div className="space-y-4 text-center">
+        <a className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600">
+          Finalizar Compra
+        </a>
       </div>
     </div>
   );

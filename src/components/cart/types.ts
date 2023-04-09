@@ -1,4 +1,4 @@
 import { SetDialogType } from "../../context/dialog-context";
-import { ItemType } from "./item";
+import { CardItemType, Item } from "./item";
 
-export type CartType = { dialog: SetDialogType; items: ItemType[] };
+export type CartType = { dialog: SetDialogType; cards: CardItemType[] };
