@@ -1,36 +1,30 @@
-import { Dispatch, SetStateAction, useContext, useState } from "react";
-import { Cart, CartType, Page, TableDialog, CardItemType } from "../components";
+import { useContext, useState } from "react";
+import {
+  Cart,
+  CartType,
+  Page,
+  TableDialog,
+  CardItemType,
+  Item,
+} from "../components";
 import { Product } from "./table";
 import { DialogContext } from "../context/dialog-context";
-
-const selectedRow = (
-  row: Product,
-  cards: CardItemType[],
-  setItems: Dispatch<SetStateAction<CardItemType[]>>
-) => {
-  const { name, price } = row;
-  cards.push({
-    item: { name, price, quantity: 0, key: String(Math.random()) },
-    onDelete: (item) => {
-      const filtered = cards.filter((card) => {
-        return card.item.key !== item.key;
-      });
-
-      setItems(filtered);
-    },
-  });
-};
 
 const Home = () => {
   const [cards, setItems] = useState<CardItemType[]>([]);
   const { unSetDialog } = useContext(DialogContext);
 
   const cart: CartType = {
+    cards: cards,
+
     dialog: {
       dialog: (
         <TableDialog
           selectedRow={(row: Product) => {
-            selectedRow(row, cards, setItems);
+            const { name, price } = row;
+            cards.push({
+              item: { name, price, quantity: 0, key: String(Math.random()) },
+            });
             unSetDialog();
           }}
         />
@@ -38,12 +32,20 @@ const Home = () => {
       title: "Produtos",
     },
 
-    cards: cards,
+    onItemDeleted: (item: Item) => {
+      const filtered = cards.filter((card) => card.item.key !== item.key);
+
+      setItems(filtered);
+    },
   };
 
   return (
     <Page taskBar={true}>
-      <Cart dialog={cart.dialog} cards={cart.cards} />
+      <Cart
+        dialog={cart.dialog}
+        cards={cart.cards}
+        onItemDeleted={cart.onItemDeleted}
+      />
     </Page>
   );
 };

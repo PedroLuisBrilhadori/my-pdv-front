@@ -7,5 +7,5 @@ export type Item = {
 
 export type CardItemType = {
   item: Item;
-  onDelete?: (item: Item) => void;
+  onDeleted?: (item: Item) => void;
 };

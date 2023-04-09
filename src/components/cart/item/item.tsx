@@ -27,7 +27,7 @@ export const CartItem = ({ item, ...props }: CardItemType) => {
         <a
           className="cursor-pointer"
           onClick={() => {
-            if (props.onDelete) props.onDelete(item);
+            if (props.onDeleted) props.onDeleted(item);
           }}
         >
           <span className="material-icons-outlined text-p-red">delete</span>

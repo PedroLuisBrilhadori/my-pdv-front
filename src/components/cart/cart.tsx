@@ -2,7 +2,7 @@ import { useDialog } from "../../hooks";
 import { CartItem } from "./item";
 import { CartType } from "./types";
 
-export const Cart = ({ dialog, cards }: CartType) => {
+export const Cart = ({ dialog, cards, ...props }: CartType) => {
   const { setDialog } = useDialog();
 
   return (
@@ -28,7 +28,7 @@ export const Cart = ({ dialog, cards }: CartType) => {
               <CartItem
                 key={card.item.key}
                 item={card.item}
-                onDelete={card.onDelete}
+                onDeleted={props.onItemDeleted}
               />
             );
           })}
