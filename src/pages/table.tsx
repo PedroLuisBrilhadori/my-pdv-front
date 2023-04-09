@@ -43,7 +43,7 @@ export default function Home() {
   };
 
   const [dataSource, setDataSource] = useState({
-    data: [],
+    data: [] as Product[],
     total: 0,
     totalPages: 0,
   });
@@ -55,9 +55,7 @@ export default function Home() {
         setDataSource({
           data,
           total,
-          totalPages: Math.floor(
-            (total + query.maxItems() - 1) / query.maxItems()
-          ),
+          totalPages: query.maxItems(),
         });
       });
     }
@@ -81,10 +79,22 @@ export default function Home() {
   );
 }
 
+export type Product = {
+  name: string;
+  price: number;
+  unit: boolean;
+};
+
+export type GetProducts = {
+  data: Product[];
+  page: number;
+  total: number;
+};
+
 async function getProducts(query: string) {
   const response = await fetch(ApiRoutes.products.base + query);
 
   const { data, page, total } = await response.json();
 
-  return { data, page, total };
+  return { data, page, total } as GetProducts;
 }

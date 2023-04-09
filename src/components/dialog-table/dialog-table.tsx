@@ -48,9 +48,7 @@ export const DialogTable = () => {
         setDataSource({
           data,
           total,
-          totalPages: Math.floor(
-            (total + query.maxItems() - 1) / query.maxItems()
-          ),
+          totalPages: query.maxItems(),
         });
       });
     }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   ActionButtonsType,
   NavigateButtonType,
@@ -6,7 +6,9 @@ import {
   SelectorType,
 } from "./types";
 
-export const Paginator = ({ maxPage, ...props }: PaginatorType) => {
+export const Paginator = ({ maxItems, ...props }: PaginatorType) => {
+  const maxPage = Math.floor((props.total + maxItems - 1) / maxItems);
+
   return (
     <div
       aria-label="table-paginator"
@@ -15,17 +17,18 @@ export const Paginator = ({ maxPage, ...props }: PaginatorType) => {
       <div>total de itens: {props.total}</div>
 
       <div className="flex justify-end gap-3">
-        <Selector onChange={props.maxChange} />
+        <Selector onChange={props.maxChange} maxItems={maxItems} />
         <ActionButtons maxPage={maxPage} pageChange={props.pageChange} />
       </div>
     </div>
   );
 };
 
-export const Selector = ({ onChange }: SelectorType) => {
+export const Selector = ({ onChange, maxItems }: SelectorType) => {
   return (
     <div>
       <select
+        value={maxItems}
         aria-label="table-max-change"
         className="cursor-pointer bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5"
         onChange={(e) => {

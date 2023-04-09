@@ -16,6 +16,7 @@ export const Table = <T,>({ dataSource, columns, ...props }: TableType<T>) => {
 
         <tbody className="divide-y divide-gray-200">
           <TableRows
+            max={props.max}
             columns={columns}
             dataSource={dataSource}
             selectedRow={props.selectedRow}
@@ -24,9 +25,9 @@ export const Table = <T,>({ dataSource, columns, ...props }: TableType<T>) => {
       </table>
       <div className="w-full">
         <Paginator
+          maxItems={props.max}
           pageChange={props.pageChange}
           maxChange={props.maxChange}
-          maxPage={props.max}
           total={props.total}
         />
       </div>

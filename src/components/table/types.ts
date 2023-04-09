@@ -10,6 +10,7 @@ export type TableRowType<T> = {
 export type TableRowsType<T> = {
   dataSource: T[];
   columns: TableHeaderType[];
+  max: number;
   selectedRow?: (row: T) => any;
 };
 

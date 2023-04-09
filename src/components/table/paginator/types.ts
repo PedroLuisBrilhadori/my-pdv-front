@@ -1,11 +1,12 @@
 export type PaginatorType = {
   maxChange: (max: number) => void;
   pageChange: (page: number) => void;
-  maxPage: number;
+  maxItems: number;
   total: number;
 };
 
 export type SelectorType = {
+  maxItems: number;
   onChange: (max: number) => void;
 };
 
