@@ -7,3 +7,4 @@ export * from "./cart";
 export * from "./dialog";
 export * from "./table-dialog";
 export * from "./add-item-dialog";
+export * from "./item-cart";

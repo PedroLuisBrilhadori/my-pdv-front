@@ -1,6 +1,6 @@
-import { SetDialogType } from "../../context/dialog-context";
-import { useDialog } from "../../hooks";
-import { CartItem } from "./item";
+import { ItemCard } from "../item-cart";
+import { AddItem } from "./add-item";
+import { ClearCart } from "./clear-cart";
 import { CartType } from "./types";
 
 export const Cart = ({ dialog, cards, ...props }: CartType) => {
@@ -18,7 +18,7 @@ export const Cart = ({ dialog, cards, ...props }: CartType) => {
         <ul className="space-y-4">
           {cards.map((card, i) => {
             return (
-              <CartItem
+              <ItemCard
                 key={card.item.key}
                 item={card.item}
                 onDeleted={props.onItemDeleted}
@@ -33,38 +33,6 @@ export const Cart = ({ dialog, cards, ...props }: CartType) => {
           Finalizar Compra
         </a>
       </div>
-    </div>
-  );
-};
-
-type AddItem = {
-  dialog: SetDialogType;
-};
-
-export const AddItem = ({ dialog }: AddItem) => {
-  const { setDialog } = useDialog();
-
-  return (
-    <div
-      className="flex items-center gap-2 cursor-pointer"
-      onClick={() => {
-        setDialog(dialog);
-      }}
-    >
-      <span className="material-icons-outlined">add</span>
-      <p className="text-xl">Adicionar produto</p>
-    </div>
-  );
-};
-
-type ClearCart = {
-  onClearItems?: () => void;
-};
-
-export const ClearCart = ({ onClearItems }: ClearCart) => {
-  return (
-    <div className="flex items-center cursor-pointer" onClick={onClearItems}>
-      <span className="material-icons-outlined">close</span>
     </div>
   );
 };

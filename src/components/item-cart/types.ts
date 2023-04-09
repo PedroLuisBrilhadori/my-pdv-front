@@ -4,8 +4,3 @@ export type Item = {
   price: number;
   quantity: number;
 };
-
-export type CardItemType = {
-  item: Item;
-  onDeleted?: (item: Item) => void;
-};

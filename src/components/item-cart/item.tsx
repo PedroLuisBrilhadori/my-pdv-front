@@ -1,6 +1,12 @@
-import { CardItemType } from "./types";
+import { RemoveItem } from "./remove-item";
+import { Item } from "./types";
 
-export const CartItem = ({ item, ...props }: CardItemType) => {
+export type ItemCard = {
+  item: Item;
+  onDeleted?: (item: Item) => void;
+};
+
+export const ItemCard = ({ item, ...props }: ItemCard) => {
   return (
     <li className="flex items-center justify-between px-5">
       <div className="flex items-center gap-4">
@@ -23,16 +29,7 @@ export const CartItem = ({ item, ...props }: CardItemType) => {
         </div>
       </div>
 
-      <div>
-        <a
-          className="cursor-pointer"
-          onClick={() => {
-            if (props.onDeleted) props.onDeleted(item);
-          }}
-        >
-          <span className="material-icons-outlined text-p-red">delete</span>
-        </a>
-      </div>
+      <RemoveItem onDeleted={props.onDeleted} item={item} />
     </li>
   );
 };
