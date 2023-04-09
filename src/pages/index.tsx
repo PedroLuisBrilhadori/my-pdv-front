@@ -1,8 +1,6 @@
 import { Dispatch, SetStateAction, useContext, useState } from "react";
-import { Cart, CartType, Page } from "../components";
-import { TableDialog } from "../components/table-dialog";
+import { Cart, CartType, Page, TableDialog, ItemType } from "../components";
 import { Product } from "./table";
-import { ItemType } from "../components/cart/item";
 import { DialogContext } from "../context/dialog-context";
 
 const addItem = (

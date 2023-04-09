@@ -1,8 +1,6 @@
 import { useDialog } from "../../hooks";
-import { Item, ItemType } from "./item";
-import { SetDialogType } from "../../context/dialog-context";
-
-export type CartType = { dialog: SetDialogType; items: ItemType[] };
+import { Item } from "./item";
+import { CartType } from "./types";
 
 export const Cart = ({ dialog, items }: CartType) => {
   const { setDialog } = useDialog();
