@@ -8,7 +8,7 @@ export type ItemCard = {
 
 export const ItemCard = ({ item, ...props }: ItemCard) => {
   return (
-    <li className="flex items-center justify-between px-5">
+    <li className="flex items-center justify-between px-5 p-2 border-t border-b divider-slate-100">
       <div className="flex items-center gap-4">
         <div className="h-16 w-16 bg-black rounded"></div>
 
