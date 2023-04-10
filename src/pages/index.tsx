@@ -4,14 +4,14 @@ import {
   CartType,
   Page,
   TableDialog,
-  CardItemType,
+  ItemCard,
   Item,
 } from "../components";
 import { Product } from "./table";
 import { DialogContext } from "../context/dialog-context";
 
 const Home = () => {
-  const [cards, setItems] = useState<CardItemType[]>([]);
+  const [cards, setItems] = useState<ItemCard[]>([]);
   const { unSetDialog } = useContext(DialogContext);
 
   const cart: CartType = {

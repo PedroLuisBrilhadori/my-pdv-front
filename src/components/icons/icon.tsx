@@ -18,7 +18,7 @@ type ButtonIcon = {
 export const ButtonIcon = ({ children, className, onClick }: ButtonIcon) => {
   return (
     <div
-      className={`cursor-pointer flex items-center hover:bg-gray-300 p-1 rounded-full ${className}`}
+      className={`cursor-pointer select-none flex items-center hover:bg-gray-300 p-1 rounded-full ${className}`}
       onClick={onClick}
     >
       <span className="material-icons-outlined">{children}</span>
